@@ -1,29 +1,28 @@
-/**
- * TODO write a JavaScript function that takes a string and returns it in revserse order.
- * DO NOT use the built-in reverse() method.
- * Should return the reversed string.
- * For example:
- *   reverseString("hello") should return "olleh"
- *   reverseString("world") should return "dlrow"
- *   reverseString("12345") should return "54321"
- */
-function reverseString() {}
+// 1. Function to reverse a string without using reverse()
+function reverseString(str) {
+  let reversedStr = "";
+  for (let i = str.length - 1; i >= 0; i--) {
+    reversedStr += str[i];
+  }
+  return reversedStr;
+}
+console.log(reverseString("hello")); // Output: "olleh"
+console.log(reverseString("world")); // Output: "dlrow"
+console.log(reverseString("12345")); // Output: "54321"
 
-/**
- * TODO write a JavaScript function that takes a number and returns it in the reverse order.
- * Should return the reversed number.
- * For example:
- *   reverseNumber(12345) should return 54321
- *   reverseNumber(98765) should return 56789
- *   reverseNumber(101010) should return 10101
- */
+//----------------------------------------------------------------
+// 2. Function to reverse a number
+function reverseNumber(num) {
+  const reversedString = String(num).split("").reverse().join("");
+  return Number(reversedString);
+}
+console.log(reverseNumber(12345)); // Output: 54321
+console.log(reverseNumber(98765)); // Output: 56789
+console.log(reverseNumber(101010)); // Output: 10101
 
-function reverseNumber() {}
-
-/**
- * TODO destruct the following object to get name and age.
- */
-const person = {
+//----------------------------------------------------------------
+// 3. Destructure the object to get name and age
+const { name, info: {age} } = {
   name: "John",
   info: {
     age: 30,
@@ -31,23 +30,25 @@ const person = {
     job: "Developer",
   },
 };
+console.log(name); // Output: "John"
+console.log(age); // Output: 30
 
-/**
- * TODO destruct the following array the first and second element, and the remaining elements in a third variable.
- */
+//----------------------------------------------------------------
+// 4. Destructure the array to get first, second, and rest elements
+const [first, second, ...rest] = ["apple", "banana", "cherry", "dates", "elderberry", "fig"];
+console.log(first); // Output: "apple"
+console.log(second); // Output: "banana"
+console.log(rest); // Output: ["cherry", "dates", "elderberry", "fig"]
 
-const thisArray = ["apple", "banana", "cherry", "dates", "elderberry", "fig"];
-
-/**
- * !!!!OPTIONAL!!!!
- * TODO Write a JavaScript function that checks if a string is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads * the same forward and backward. For example, "madam" is a palindrome.
- * The function should return true if the string is a palindrome and false if it is not.
- * For example:
- *    isPalindrome("madam") should return true
- *    isPalindrome("hello") should return false
- *    isPalindrome("12321") should return true
- *    isPalindrome("race car") should return true
- *    isPalindrome("coding") should return false
- */
-
-function isPalindrome() {}
+//----------------------------------------------------------------
+// 5. Function to check if a string is a palindrome
+function isPalindrome(str) {
+  const normalizedString = str.replace(/\s+/g, "").toLowerCase();
+  const reversedString = normalizedString.split("").reverse().join("");
+  return normalizedString === reversedString;
+} 
+console.log(isPalindrome("madam")); // Output: true
+console.log(isPalindrome("hello")); // Output: false
+console.log(isPalindrome("12321")); // Output: true
+console.log(isPalindrome("race car")); // Output: true
+console.log(isPalindrome("coding")); // Output: false
