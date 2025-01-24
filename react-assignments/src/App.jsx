@@ -1,4 +1,9 @@
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Nav from "./Components/Nav/Nav";
+import Homepage from "./Components/Homepage/Homepage";
+import EffectsComponent from "./Components/Effect/EffectsComponent";
+import MyStateComponent from "./Components/MyStateComponent/MyStateComponent";
 import PropsComponent from "./Components/MyStateComponent/PropsComponent";
 
 function App() {
@@ -13,13 +18,15 @@ function App() {
   };
 
   return (
-    <div>
-      <header>
-        <h1>This is React</h1>
-      </header>
-      {/* TODO create a child component in proper jsx, the component takes the person object as props and render the data */}
-      <PropsComponent person={person} />
-    </div>
+    <Router>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/props" element={<PropsComponent person={person} />} />
+        <Route path="/state" element={<MyStateComponent />} />
+        <Route path="/effects" element={<EffectsComponent />} />
+      </Routes>
+    </Router>
   );
 }
 

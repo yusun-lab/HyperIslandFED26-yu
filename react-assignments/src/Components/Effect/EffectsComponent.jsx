@@ -3,3 +3,47 @@
 // - use the useEffect hook to fetch the data when the component mounts
 // - use the useState hook to store the data
 // - display the data in a list
+import React, { useEffect, useState } from "react";
+import "./EffectsComponent.css";
+import MyStateComponent from "../MyStateComponent/MyStateComponent";
+function EffectsComponent() {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showMyState, setShowMyState] = useState(false);
+
+  useEffect(() => {
+    fetch("https://thronesapi.com/api/v2/Characters")
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+        console.log(data);
+      })
+      .catch((error) => console.error("Error fetching data:", error.message))
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  return (
+    <div>
+      <button onClick={() => setShowMyState(!showMyState)}>Toggle View</button>
+      <h1>Effects Component</h1>
+      {showMyState ? (
+        <MyStateComponent />
+      ) : (
+        <ul className="characterList">
+          {data.map((character) => (
+            <li key={character.id} className="character">
+              {character.fullName} - {character.title}
+              <img src={character.imageUrl} alt={character.fullName} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+export default EffectsComponent;
